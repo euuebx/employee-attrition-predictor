@@ -1,0 +1,28 @@
+============================================================
+EMPLOYEE ATTRITION - TURNOVER COST ANALYSIS
+============================================================
+
+Model AUC: 0.779
+Model Recall (catching leavers): 0.532
+Decision threshold: 0.41
+
+Total employees analysed: 1470
+High-risk employees identified: 247
+
+Total replacement cost if all leave: EUR 13,202,340
+Estimated retention program cost (15%): EUR 1,980,351
+Estimated savings (60% retained): EUR 5,941,053
+Net benefit: EUR 5,941,053
+
+TOP 10 HIGHEST-COST AT-RISK EMPLOYEES:
+------------------------------------------------------------
+  Risk: 96% | Salary: EUR 238,308 | Replacement: EUR 238,308
+  Risk: 94% | Salary: EUR 238,140 | Replacement: EUR 238,140
+  Risk: 96% | Salary: EUR 230,952 | Replacement: EUR 230,952
+  Risk: 96% | Salary: EUR 225,888 | Replacement: EUR 225,888
+  Risk: 95% | Salary: EUR 165,096 | Replacement: EUR 165,096
+  Risk: 97% | Salary: EUR 164,340 | Replacement: EUR 164,340
+  Risk: 97% | Salary: EUR 163,320 | Replacement: EUR 163,320
+  Risk: 98% | Salary: EUR 158,328 | Replacement: EUR 158,328
+  Risk: 96% | Salary: EUR 155,232 | Replacement: EUR 155,232
+  Risk: 95% | Salary: EUR 146,028 | Replacement: EUR 146,028
