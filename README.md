@@ -1,84 +1,67 @@
-# Employee Attrition Predictor
+Employee Attrition Analysis
+A machine learning project that predicts which employees are likely to leave a company, using HR data. Also includes an example cost scenario.
 
-A Python machine learning project that uses HR data to predict employee attrition and identify factors associated with employees leaving.
+Dataset
+IBM HR Analytics Employee Attrition dataset:
+https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
 
-## Overview
+File used: WA_Fn-UseC_-HR-Employee-Attrition.csv. 1,470 employees, 35 features, about 16% left.
 
-The project uses the IBM HR Analytics dataset containing **1,470 employees**.
+Results
+Trained a Random Forest with grid search and 5-fold cross validation (scoring on ROC-AUC), then picked a threshold that maximizes F1.
 
-It includes:
+Best CV AUC: 0.804. Threshold chosen: 0.41.
 
-* Data cleaning and preprocessing
-* Exploratory data analysis
-* Random Forest classification
-* Hyperparameter tuning using GridSearchCV
-* Classification threshold tuning
-* Model evaluation
-* Feature importance analysis
-* Basic turnover cost estimation
+Metric	Value
+Accuracy	82.99%
+Precision	0.472
+Recall	0.532
+F1	0.500
+AUC	0.779
+Classification report:
 
-## Results
+Class	Precision	Recall	F1
+Stayed	0.91	0.89	0.90
+Left	0.47	0.53	0.50
+Confusion matrix:
 
-The Random Forest model achieved:
+text
+[[219  28]
+ [ 22  25]]
+Top features: MonthlyIncome, Age, TotalWorkingYears, DailyRate, YearsAtCompany.
 
-| Metric    |  Score |
-| --------- | -----: |
-| Accuracy  | 82.99% |
-| Precision |  0.472 |
-| Recall    |  0.532 |
-| F1 Score  |  0.500 |
-| ROC AUC   |  0.779 |
+Note: recall for "Left" is 0.53, so the model catches about half of leavers. Precision is 0.47, so when it says someone will leave it's right about half the time.
 
-The best classification threshold was **0.41**.
+Turnover cost analysis (example only)
+This part is just an example. The numbers are based on assumptions, not real data.
 
-### Top Features
+Assumptions: replacement cost = 1 year salary, program cost = 15% of total, program keeps 60% of at-risk employees.
 
-The most important features were:
+Item	Value
+High-risk employees	247
+Total replacement cost	EUR 13,202,340
+Program cost (15%)	EUR 1,980,351
+Net savings (60% retained)	EUR 5,941,053
+These are not real results. The model only gives probabilities, and it's wrong more than half the time when it says someone will leave. The savings number comes from plugging assumptions into a formula.
 
-1. Monthly Income
-2. Age
-3. Total Working Years
-4. Daily Rate
-5. Years at Company
-6. OverTime
-7. Monthly Rate
-8. Hourly Rate
-9. Distance From Home
-10. Number of Companies Worked
+Files
+File	What it is
+attrition_analysis.py	main script
+WA_Fn-UseC_-HR-Employee-Attrition.csv	dataset
+01_attrition_distribution.png	stayed vs left
+02_attrition_by_overtime.png	attrition by overtime
+03_attrition_by_satisfaction.png	attrition by satisfaction
+04_income_by_attrition.png	income vs attrition
+05_age_by_attrition.png	age vs attrition
+06_feature_importance.png	top 10 features
+07_roc_curve.png	ROC curve
+turnover_cost_results.txt	cost scenario summary
+Requirements
+Python 3.12+:
 
-## Turnover Cost Analysis
-
-The model identified **247 employees as high risk**.
-
-Using the project's cost assumptions:
-
-* Potential replacement cost: **€13.20M**
-* Estimated retention programme cost: **€1.98M**
-* Estimated net savings: **€5.94M**
-
-These are estimates based on simplified assumptions rather than actual company costs.
-
-## Technologies
-
-* Python
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-* Scikit-learn
-
-## How to Run
-
-Install the required libraries:
-
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn
-```
-
-Then run:
-
-```bash
+text
+pip install pandas numpy scikit-learn matplotlib seaborn
+How to run
+text
 python attrition_analysis.py
-```
-
-The script generates the analysis results, charts, ROC curve, feature importance plot, and turnover cost report.
+The script cleans the data, saves 5 EDA plots, tunes a Random Forest, picks the best threshold by F1, evaluates the model, saves feature importance and ROC plots, then runs the cost scenario.
